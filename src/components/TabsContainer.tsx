@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Scene3D } from './Scene3D';
 
@@ -12,14 +12,16 @@ interface TabsContainerProps {
   tabs: Tab[];
 }
 
-const TabsWrapper = styled.div`
+const TabsWrapper = styled.div<{ isLoading: boolean }>`
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg, #120458, #4b0082, #ff1493, #00fff5);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
+  opacity: ${props => props.isLoading ? 0 : 1};
+  transition: opacity 0.3s ease-in;
 
   @keyframes gradient {
     0% {
@@ -75,36 +77,70 @@ const TabContent = styled.div`
   padding: 2rem;
   overflow: auto;
   color: white;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+`;
+
+const LoadingOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-45deg, #120458, #4b0082, #ff1493, #00fff5);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 `;
 
 export const TabsContainer = ({ tabs }: TabsContainerProps) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(tabs[0]?.id);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <TabsWrapper>
-      <Scene3D activeTab={activeTab} />
-      <TabButtons>
-        {tabs.map((tab) => (
-          <TabButton
-            key={tab.id}
-            active={activeTab === tab.id}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            {tab.label}
-          </TabButton>
-        ))}
-      </TabButtons>
-      <TabContent>
-        {tabs.map((tab) => (
-          <div key={tab.id} style={{ display: activeTab === tab.id ? 'block' : 'none' }}>
-            {typeof tab.content === 'function' ? (
-              tab.content({ activeTab })
-            ) : (
-              tab.content
-            )}
-          </div>
-        ))}
-      </TabContent>
-    </TabsWrapper>
+    <>
+      {isLoading && <LoadingOverlay />}
+      <TabsWrapper isLoading={isLoading}>
+        <Scene3D activeTab={activeTab} />
+        <TabButtons>
+          {tabs.map((tab) => (
+            <TabButton
+              key={tab.id}
+              active={activeTab === tab.id}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.label}
+            </TabButton>
+          ))}
+        </TabButtons>
+        <TabContent>
+          {tabs.map((tab) => (
+            <div key={tab.id} style={{ display: activeTab === tab.id ? 'block' : 'none' }}>
+              {typeof tab.content === 'function' ? (
+                tab.content({ activeTab })
+              ) : (
+                tab.content
+              )}
+            </div>
+          ))}
+        </TabContent>
+      </TabsWrapper>
+    </>
   );
 };

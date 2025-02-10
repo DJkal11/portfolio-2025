@@ -1,4 +1,3 @@
-import { Scene3D } from './components/Scene3D';
 import { TabsContainer } from './components/TabsContainer';
 import './App.css';
 
@@ -13,11 +12,6 @@ function App() {
           <p>I'm a developer passionate about creating amazing experiences.</p>
         </div>
       ),
-    },
-    {
-      id: '3d',
-      label: '3D Scene',
-      content: ({ activeTab }: { activeTab: string }) => <Scene3D activeTab={activeTab} />,
     },
     {
       id: 'projects',
@@ -44,4 +38,4 @@ function App() {
   return <TabsContainer tabs={tabs} />;
 }
 
-export default App
+export default App;
