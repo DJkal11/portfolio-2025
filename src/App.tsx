@@ -1,16 +1,6 @@
 import { TabsContainer } from './components/TabsContainer';
 import './App.css';
-import styled from '@emotion/styled';
 import { ProjectCard } from './components/ProjectCard';
-
-const ProjectsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
 
 function App() {
   const sampleProjects = [
