@@ -72,18 +72,20 @@ const TabButton = styled.button<{ active: boolean }>`
   }
 `;
 
-const TabContent = styled.div`
+const TabContent = styled.div<{ isVisible: boolean }>`
   flex: 1;
-  padding: 2rem;
+  padding: 4rem 2rem;
   overflow: auto;
   color: white;
-  opacity: 0;
-  animation: fadeIn 0.5s ease-in forwards;
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: translateY(${props => props.isVisible ? '0' : '20px'});
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  text-align: center;
 `;
 
 const LoadingOverlay = styled.div`
@@ -104,6 +106,8 @@ const LoadingOverlay = styled.div`
 export const TabsContainer = ({ tabs }: TabsContainerProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(tabs[0]?.id);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [visibleTab, setVisibleTab] = useState<string | null>(tabs[0]?.id);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -112,6 +116,21 @@ export const TabsContainer = ({ tabs }: TabsContainerProps) => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const handleTabChange = (tabId: string) => {
+    if (tabId === activeTab || isTransitioning) return;
+    
+    setIsTransitioning(true);
+    setVisibleTab(null);
+
+    setTimeout(() => {
+      setActiveTab(tabId);
+      setTimeout(() => {
+        setVisibleTab(tabId);
+        setIsTransitioning(false);
+      }, 300);
+    }, 500);
+  };
 
   return (
     <>
@@ -123,20 +142,29 @@ export const TabsContainer = ({ tabs }: TabsContainerProps) => {
             <TabButton
               key={tab.id}
               active={activeTab === tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => handleTabChange(tab.id)}
+              disabled={isTransitioning}
             >
               {tab.label}
             </TabButton>
           ))}
         </TabButtons>
-        <TabContent>
+        <TabContent isVisible={!isTransitioning && activeTab === visibleTab}>
           {tabs.map((tab) => (
-            <div key={tab.id} style={{ display: activeTab === tab.id ? 'block' : 'none' }}>
-              {typeof tab.content === 'function' ? (
-                tab.content({ activeTab })
-              ) : (
+            <div 
+              key={tab.id} 
+              style={{ 
+                display: activeTab === tab.id ? 'block' : 'none',
+                position: 'absolute',
+                width: '100%',
+                left: 0,
+                top: 0
+              }}
+            >
+              {typeof tab.content === 'function' ? 
+                tab.content({ activeTab }) : 
                 tab.content
-              )}
+              }
             </div>
           ))}
         </TabContent>
