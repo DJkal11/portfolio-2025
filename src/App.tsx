@@ -5,36 +5,28 @@ import { ProjectCard } from './components/ProjectCard';
 function App() {
   const sampleProjects = [
     {
-      title: "NeoVerse - AI-Powered Virtual World",
-      description: "An immersive virtual reality platform that uses artificial intelligence to create dynamic, evolving environments. Features real-time physics simulation and multiplayer interactions in a cyberpunk-themed world.",
+      title: "Weather App",
+      description: "A modern weather application that provides real-time weather information with a clean, intuitive interface. Features include current conditions, forecasts, and location-based weather data.",
       imageUrl: "https://picsum.photos/600/400?random=1",
-      techStack: ["React", "Three.js", "WebGL", "TensorFlow.js", "WebRTC"],
-      liveUrl: "https://example.com/neoverse",
-      githubUrl: "https://github.com/example/neoverse"
+      techStack: ["React", "JavaScript", "Weather API", "CSS", "Responsive Design"],
+      liveUrl: "https://degree-weather.netlify.app/",
+      githubUrl: "https://github.com/DJkal11/New-weather-App"
     },
     {
-      title: "CryptoSync - Blockchain Data Platform",
-      description: "A real-time blockchain analytics dashboard with advanced visualization tools. Monitors multiple chains simultaneously and provides predictive insights using machine learning algorithms.",
+      title: "Climbing Ant Game",
+      description: "An engaging browser-based game where players control an ant climbing upward while avoiding obstacles. Features smooth animations and increasing difficulty levels for an addictive gaming experience.",
       imageUrl: "https://picsum.photos/600/400?random=2",
-      techStack: ["Next.js", "GraphQL", "Web3.js", "D3.js", "PostgreSQL"],
-      liveUrl: "https://example.com/cryptosync",
-      githubUrl: "https://github.com/example/cryptosync"
+      techStack: ["JavaScript", "HTML5 Canvas", "CSS", "Game Physics", "Animation"],
+      liveUrl: "https://climbing-ant.netlify.app/",
+      githubUrl: "https://github.com/DJkal11/climbing-ant"
     },
     {
-      title: "SynthWave - AI Music Generator",
-      description: "An innovative music creation tool that uses deep learning to generate unique synthwave tracks. Features real-time audio processing and collaborative composition capabilities.",
+      title: "Audio Visualizer",
+      description: "An interactive audio visualization tool that transforms music into stunning visual displays. Users can upload their own audio files and watch as the application creates dynamic, responsive visuals based on the audio frequencies.",
       imageUrl: "https://picsum.photos/600/400?random=3",
-      techStack: ["Vue.js", "TensorFlow", "Web Audio API", "Node.js", "Redis"],
-      liveUrl: "https://example.com/synthwave",
-      githubUrl: "https://github.com/example/synthwave"
-    },
-    {
-      title: "QuantumCode - IDE of the Future",
-      description: "A next-generation integrated development environment designed for quantum computing. Features advanced code analysis, real-time collaboration, and quantum circuit visualization.",
-      imageUrl: "https://picsum.photos/600/400?random=4",
-      techStack: ["Electron", "TypeScript", "Python", "WebAssembly", "Qiskit"],
-      liveUrl: "https://example.com/quantumcode",
-      githubUrl: "https://github.com/example/quantumcode"
+      techStack: ["JavaScript", "Three.js", "Web Audio API", "Canvas", "HTML5", "CSS3"],
+      liveUrl: "https://visual-audio.netlify.app/",
+      githubUrl: "https://github.com/DJkal11/Audio-visualiser"
     }
   ];
 
@@ -170,7 +162,7 @@ function App() {
             marginBottom: '3rem'
           }}>
             <a
-              href="https://www.linkedin.com/in/your-profile"
+              href="https://www.linkedin.com/in/lucian-kallee-24893519a/"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -207,7 +199,7 @@ function App() {
             </a>
 
             <a
-              href="mailto:your.email@example.com"
+              href="mailto:luciankallee@gmail.com"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -242,27 +234,31 @@ function App() {
             </a>
 
             <a
-              href="/path-to-your-resume.pdf"
+              href="/resume.pdf"
               download
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '1rem',
-                padding: '1rem',
-                background: 'rgba(75, 0, 130, 0.1)',
-                border: '1px solid rgba(75, 0, 130, 0.3)',
-                borderRadius: '8px',
-                color: '#4b0082',
+                padding: '1.2rem',
+                background: 'rgba(75, 0, 130, 0.3)',
+                border: '2px solid rgba(147, 112, 219, 0.6)',
+                borderRadius: '12px',
+                color: '#9370db',
                 textDecoration: 'none',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
+                boxShadow: '0 0 15px rgba(147, 112, 219, 0.4)',
+                animation: 'pulse 2s infinite'
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.background = 'rgba(75, 0, 130, 0.2)';
+                e.currentTarget.style.background = 'rgba(75, 0, 130, 0.4)';
                 e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 0 25px rgba(147, 112, 219, 0.6)';
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.background = 'rgba(75, 0, 130, 0.1)';
+                e.currentTarget.style.background = 'rgba(75, 0, 130, 0.3)';
                 e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 0 15px rgba(147, 112, 219, 0.4)';
               }}
             >
               <svg

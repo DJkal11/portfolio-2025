@@ -112,8 +112,14 @@ export const ProjectCard = ({
   liveUrl,
   githubUrl,
 }: ProjectProps) => {
+  const handleCardClick = () => {
+    if (liveUrl) {
+      window.open(liveUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
-    <Card>
+    <Card onClick={handleCardClick} style={{ cursor: liveUrl ? 'pointer' : 'default' }}>
       <ProjectImage src={imageUrl} alt={title} />
       <Title>{title}</Title>
       <Description>{description}</Description>
@@ -122,7 +128,7 @@ export const ProjectCard = ({
           <TechTag key={index}>{tech}</TechTag>
         ))}
       </TechStack>
-      <Links>
+      <Links onClick={(e) => e.stopPropagation()}>
         {liveUrl && (
           <Link href={liveUrl} target="_blank" rel="noopener noreferrer">
             🌐 Live Demo
