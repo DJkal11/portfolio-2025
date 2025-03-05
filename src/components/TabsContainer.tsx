@@ -22,31 +22,38 @@ const TabsWrapper = styled.div<{ isLoading: boolean }>`
   animation: gradient 15s ease infinite;
   opacity: ${props => props.isLoading ? 0 : 1};
   transition: opacity 0.3s ease-in;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
 
   @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @media (max-width: 768px) {
+    height: -webkit-fill-available;
   }
 `;
 
 const TabButtons = styled.div`
   display: flex;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 0.5rem;
+  padding: 1rem;
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
   z-index: 10;
   justify-content: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: 768px) {
+    gap: 0.3rem;
+    padding: 0.8rem;
+  }
 `;
 
 const TabButton = styled.button<{ active: boolean }>`
@@ -55,12 +62,18 @@ const TabButton = styled.button<{ active: boolean }>`
   background: ${props => props.active ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255, 255, 255, 0.1)'};
   color: ${props => props.active ? '#ffffff' : 'rgba(255, 255, 255, 0.8)'};
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 0.5px;
   box-shadow: ${props => props.active ? '0 4px 12px rgba(0, 0, 0, 0.15)' : 'none'};
+  -webkit-tap-highlight-color: transparent;
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);
@@ -79,13 +92,18 @@ const TabContent = styled.div<{ isVisible: boolean }>`
   color: white;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: translateY(${props => props.isVisible ? '0' : '20px'});
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   position: relative;
   width: 100%;
   max-width: 1200px;
   box-sizing: border-box;
   margin: 0 auto;
   text-align: center;
+  -webkit-overflow-scrolling: touch;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const LoadingOverlay = styled.div`
@@ -112,7 +130,7 @@ export const TabsContainer = ({ tabs }: TabsContainerProps) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);
@@ -128,8 +146,8 @@ export const TabsContainer = ({ tabs }: TabsContainerProps) => {
       setTimeout(() => {
         setVisibleTab(tabId);
         setIsTransitioning(false);
-      }, 300);
-    }, 500);
+      }, 200);
+    }, 300);
   };
 
   return (

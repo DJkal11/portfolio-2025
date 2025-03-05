@@ -45,8 +45,8 @@ const NeonGeometry = ({ activeTab, orbitControlsRef }: GeometryProps & { orbitCo
   useEffect(() => {
     // Initialize small objects properties
     if (smallObjectsPropsRef.current.length === 0) {
-      [...Array(8)].forEach((_, i) => {
-        const angle = (i / 8) * Math.PI * 2;
+      [...Array(4)].forEach((_, i) => {
+        const angle = (i / 4) * Math.PI * 2;
         const radius = 3;
         const position: [number, number, number] = [
           Math.cos(angle) * radius,
@@ -54,7 +54,7 @@ const NeonGeometry = ({ activeTab, orbitControlsRef }: GeometryProps & { orbitCo
           Math.sin(angle) * radius
         ];
         const size = 0.2 + Math.random() * 0.2;
-        const color = i % 3 === 0 ? "#00ffff" : i % 3 === 1 ? "#ff00ff" : "#7f00ff";
+        const color = i % 3 === 0 ? "#00fff5" : i % 3 === 1 ? "#ff00ff" : "#7f00ff";
         
         smallObjectsPropsRef.current.push({ position, size, color });
       });
@@ -62,7 +62,7 @@ const NeonGeometry = ({ activeTab, orbitControlsRef }: GeometryProps & { orbitCo
 
     // Initialize decorative objects properties
     if (decorativeObjectsPropsRef.current.length === 0) {
-      [...Array(15)].forEach((_, i) => {
+      [...Array(8)].forEach((_, i) => {
         const radius = 2 + Math.random() * 4;
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.random() * Math.PI;
@@ -92,14 +92,14 @@ const NeonGeometry = ({ activeTab, orbitControlsRef }: GeometryProps & { orbitCo
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += 0.002;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+      groupRef.current.rotation.y += 0.001;
+      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.25) * 0.05;
     }
     if (smallObjectsRef.current) {
       smallObjectsRef.current.children.forEach((child, i) => {
-        child.rotation.x += 0.01 * (i % 2 ? 1 : -1);
-        child.rotation.y += 0.01 * (i % 3 ? 1 : -1);
-        child.position.y += Math.sin(state.clock.elapsedTime * 0.5 + i) * 0.002;
+        child.rotation.x += 0.005 * (i % 2 ? 1 : -1);
+        child.rotation.y += 0.005 * (i % 3 ? 1 : -1);
+        child.position.y += Math.sin(state.clock.elapsedTime * 0.25 + i) * 0.001;
       });
     }
   });
