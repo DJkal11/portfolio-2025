@@ -39,6 +39,7 @@ function App() {
           maxWidth: '800px',
           margin: '0 auto',
           padding: '2rem',
+          marginTop: '50px'
           // background: 'rgba(0, 0, 0, 0.3)',
           // borderRadius: '12px',
           // backdropFilter: 'blur(10px)',
@@ -124,7 +125,8 @@ function App() {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: '2rem',
-          padding: '1rem'
+          padding: '1rem',
+          marginTop: '100px'
         }}>
           {sampleProjects.map((project, index) => (
             <ProjectCard
@@ -151,7 +153,8 @@ function App() {
           background: 'rgba(0, 0, 0, 0.3)',
           borderRadius: '12px',
           backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)'
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          marginTop: '100px'
         }}>
           <h2 style={{ color: '#00fff5', marginBottom: '2rem', textAlign: 'center' }}>Get in Touch</h2>
           

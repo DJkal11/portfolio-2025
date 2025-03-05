@@ -14,7 +14,7 @@ interface TabsContainerProps {
 
 const TabsWrapper = styled.div<{ isLoading: boolean }>`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: linear-gradient(-45deg, #120458, #4b0082, #ff1493, #00fff5);
@@ -22,7 +22,7 @@ const TabsWrapper = styled.div<{ isLoading: boolean }>`
   animation: gradient 15s ease infinite;
   opacity: ${props => props.isLoading ? 0 : 1};
   transition: opacity 0.3s ease-in;
-  overflow: hidden;
+  position: relative;
   -webkit-overflow-scrolling: touch;
   touch-action: manipulation;
 
@@ -44,9 +44,11 @@ const TabButtons = styled.div`
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 10;
+  left: 0;
+  right: 0;
+  z-index: 100;
   justify-content: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
@@ -87,8 +89,7 @@ const TabButton = styled.button<{ active: boolean }>`
 
 const TabContent = styled.div<{ isVisible: boolean }>`
   flex: 1;
-  padding: 4rem 2rem;
-  overflow: auto;
+  padding: 26rem 2rem 4rem;
   color: white;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: translateY(${props => props.isVisible ? '0' : '20px'});
@@ -99,10 +100,11 @@ const TabContent = styled.div<{ isVisible: boolean }>`
   box-sizing: border-box;
   margin: 0 auto;
   text-align: center;
+  min-height: calc(100vh - 12rem);
   -webkit-overflow-scrolling: touch;
 
   @media (max-width: 768px) {
-    padding: 2rem 1rem;
+    padding: 20rem 1rem 2rem;
   }
 `;
 
