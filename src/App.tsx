@@ -7,7 +7,7 @@ function App() {
     {
       title: "Weather App",
       description: "A modern weather application that provides real-time weather information with a clean, intuitive interface. Features include current conditions, forecasts, and location-based weather data.",
-      imageUrl: "https://picsum.photos/600/400?random=1",
+      imageUrl: "/images/weather.jpg",
       techStack: ["React", "JavaScript", "Weather API", "CSS", "Responsive Design"],
       liveUrl: "https://degree-weather.netlify.app/",
       githubUrl: "https://github.com/DJkal11/New-weather-App"
@@ -15,7 +15,7 @@ function App() {
     {
       title: "Climbing Ant Game",
       description: "An engaging browser-based game where players control an ant climbing upward while avoiding obstacles. Features smooth animations and increasing difficulty levels for an addictive gaming experience.",
-      imageUrl: "https://picsum.photos/600/400?random=2",
+      imageUrl: "/images/ant.jpg",
       techStack: ["JavaScript", "HTML5 Canvas", "CSS", "Game Physics", "Animation"],
       liveUrl: "https://climbing-ant.netlify.app/",
       githubUrl: "https://github.com/DJkal11/climbing-ant"
@@ -23,7 +23,7 @@ function App() {
     {
       title: "Audio Visualizer",
       description: "An interactive audio visualization tool that transforms music into stunning visual displays. Users can upload their own audio files and watch as the application creates dynamic, responsive visuals based on the audio frequencies.",
-      imageUrl: "https://picsum.photos/600/400?random=3",
+      imageUrl: "/images/audio.jpg",
       techStack: ["JavaScript", "Three.js", "Web Audio API", "Canvas", "HTML5", "CSS3"],
       liveUrl: "https://visual-audio.netlify.app/",
       githubUrl: "https://github.com/DJkal11/Audio-visualiser"
