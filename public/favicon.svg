@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background shape -->
+  <rect width="64" height="64" rx="12" fill="#120458" />
+  
+  <!-- Decorative elements -->
+  <circle cx="32" cy="32" r="24" stroke="#00FFF5" stroke-width="2" stroke-opacity="0.6" />
+  <circle cx="32" cy="32" r="16" stroke="#FF00E5" stroke-width="2" stroke-opacity="0.6" />
+  
+  <!-- Letter L -->
+  <path d="M20 20V44H32" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Letter K -->
+  <path d="M36 20V44" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M36 32L44 20" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M36 32L44 44" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Animation for light effect -->
+  <circle cx="32" cy="32" r="28" stroke="#00FFF5" stroke-width="1" stroke-opacity="0.3">
+    <animate attributeName="r" values="28;30;28" dur="4s" repeatCount="indefinite" />
+    <animate attributeName="stroke-opacity" values="0.3;0.6;0.3" dur="4s" repeatCount="indefinite" />
+  </circle>
+</svg>

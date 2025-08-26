@@ -54,7 +54,7 @@ const NeonGeometry = ({ activeTab, orbitControlsRef }: GeometryProps & { orbitCo
           Math.sin(angle) * radius
         ];
         const size = 0.2 + Math.random() * 0.2;
-        const color = i % 3 === 0 ? "#00fff5" : i % 3 === 1 ? "#ff00ff" : "#7f00ff";
+        const color = i % 3 === 0 ? "#006D7A" : i % 3 === 1 ? "#5A1730" : "#3A1266";
         
         smallObjectsPropsRef.current.push({ position, size, color });
       });
@@ -77,7 +77,7 @@ const NeonGeometry = ({ activeTab, orbitControlsRef }: GeometryProps & { orbitCo
           Math.random() * Math.PI
         ];
         const scale = 0.1 + Math.random() * 0.15;
-        const color = i % 4 === 0 ? "#00ffff" : i % 4 === 1 ? "#ff00ff" : i % 4 === 2 ? "#7f00ff" : "#ff3366";
+        const color = i % 4 === 0 ? "#006D7A" : i % 4 === 1 ? "#5A1730" : i % 4 === 2 ? "#3A1266" : "#4D2636";
         
         decorativeObjectsPropsRef.current.push({
           position,
@@ -200,7 +200,7 @@ const NeonGeometry = ({ activeTab, orbitControlsRef }: GeometryProps & { orbitCo
                 toneMapped={false}
               />
             </mesh>
-            <pointLight color={props.color} intensity={1.2} distance={4} />
+            <pointLight color={props.color} intensity={0.8} distance={4} />
           </group>
         ))}
       </group>
@@ -223,7 +223,7 @@ const NeonGeometry = ({ activeTab, orbitControlsRef }: GeometryProps & { orbitCo
             <meshPhysicalMaterial
               color="#000000"
               emissive={props.color}
-              emissiveIntensity={2}
+              emissiveIntensity={1}
               metalness={1}
               roughness={0}
               clearcoat={1}
@@ -246,9 +246,9 @@ const NeonGeometry = ({ activeTab, orbitControlsRef }: GeometryProps & { orbitCo
         />
       </mesh>
 
-      <pointLight position={[3, 3, 3]} intensity={1.5} color="#00fff5" />
-      <pointLight position={[-3, -2, -3]} intensity={1.5} color="#ff1493" />
-      <pointLight position={[0, -1, 3]} intensity={1.5} color="#4b0082" />
+      <pointLight position={[3, 3, 3]} intensity={1.0} color="#006D7A" />
+      <pointLight position={[-3, -2, -3]} intensity={1.0} color="#5A1730" />
+      <pointLight position={[0, -1, 3]} intensity={1.0} color="#3A1266" />
     </group>
   );
 };

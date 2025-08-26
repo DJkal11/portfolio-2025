@@ -1,8 +1,42 @@
+import { Suspense } from 'react';
 import { TabsContainer } from './components/TabsContainer';
 import './App.css';
 import { ProjectCard } from './components/ProjectCard';
+import { lazyLoad } from './utils/lazyLoad';
+
+// Import styled components
+import {
+  HomeContainer,
+  HomeHeading,
+  BioParagraph,
+  InfoGrid,
+  TechExpertiseBox,
+  WhatIDoBox,
+  BoxHeading,
+  SkillsList,
+  SkillsListItem
+} from './components/styled/HomeComponents';
+
+import { ProjectsGrid } from './components/styled/ProjectComponents';
+
+import {
+  ContactContainer,
+  ContactHeading,
+  ContactLinksGrid,
+  LinkedInLink,
+  EmailLink,
+  ResumeLink,
+  ContactIcon,
+  ContactFooter
+} from './components/styled/ContactComponents';
+
+// Lazy load the 3D scene for better performance
+const Scene3DOptimized = lazyLoad(() => import('./components/Scene3DOptimized').then(mod => ({ 
+  default: mod.Scene3DOptimized 
+})));
 
 function App() {
+  // Project data
   const sampleProjects = [
     {
       title: "Weather App",
@@ -30,104 +64,53 @@ function App() {
     }
   ];
 
+  // Tab configuration
   const tabs = [
     {
       id: 'home',
       label: 'Home',
       content: (
-        <div style={{
-          maxWidth: '800px',
-          margin: '0 auto',
-          padding: '2rem',
-          marginTop: '50px'
-          // background: 'rgba(0, 0, 0, 0.3)',
-          // borderRadius: '12px',
-          // backdropFilter: 'blur(10px)',
-          // border: '1px solid rgba(255, 255, 255, 0.1)'
-        }}>
-          <h1 style={{ 
-            color: '#00fff5',
-            fontSize: '3rem',
-            marginBottom: '1rem',
-            textShadow: '0 0 10px rgba(0, 255, 245, 0.5)'
-          }}>
+        <HomeContainer>
+          <HomeHeading>
             Frontend Developer & UI/UX Enthusiast
-          </h1>
+          </HomeHeading>
           
-          <p style={{ 
-            fontSize: '1.2rem', 
-            lineHeight: '1.6',
-            color: 'rgba(255, 255, 255, 0.9)',
-            marginBottom: '2rem'
-          }}>
+          <BioParagraph>
             Hi, I'm Lucian! I craft engaging digital experiences with clean code and creative design. 
             My passion lies in building intuitive, performant web applications that users love to interact with.
-          </p>
+          </BioParagraph>
 
-          <div style={{ 
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            marginTop: '2rem'
-          }}>
-            <div style={{
-              background: 'rgba(255, 20, 147, 0.1)',
-              padding: '2rem',
-              borderRadius: '8px',
-              border: '1px solid rgba(255, 20, 147, 0.3)'
-            }}>
-              <h2 style={{ color: '#ff1493', marginBottom: '1rem' }}>Technical Expertise</h2>
-              <ul style={{ 
-                listStyle: 'none',
-                padding: 0,
-                margin: 0,
-                color: 'rgba(255, 255, 255, 0.8)',
-                textAlign: 'left'
-              }}>
-                <li style={{ marginBottom: '0.5rem' }}>✨ React & Modern JavaScript</li>
-                <li style={{ marginBottom: '0.5rem' }}>✨ TypeScript & Static Typing</li>
-                <li style={{ marginBottom: '0.5rem' }}>✨ Responsive & Mobile-First Design</li>
-                <li style={{ marginBottom: '0.5rem' }}>✨ State Management (Redux, Context)</li>
-                <li style={{ marginBottom: '0.5rem' }}>✨ Modern CSS & Styled Components</li>
-              </ul>
-            </div>
+          <InfoGrid>
+            <TechExpertiseBox>
+              <BoxHeading color="#ff1493">Technical Expertise</BoxHeading>
+              <SkillsList>
+                <SkillsListItem>✨ React & Modern JavaScript</SkillsListItem>
+                <SkillsListItem>✨ TypeScript & Static Typing</SkillsListItem>
+                <SkillsListItem>✨ Responsive & Mobile-First Design</SkillsListItem>
+                <SkillsListItem>✨ State Management (Redux, Context)</SkillsListItem>
+                <SkillsListItem>✨ Modern CSS & Styled Components</SkillsListItem>
+              </SkillsList>
+            </TechExpertiseBox>
 
-            <div style={{
-              background: 'rgba(0, 255, 245, 0.1)',
-              padding: '2rem',
-              borderRadius: '8px',
-              border: '1px solid rgba(0, 255, 245, 0.3)'
-            }}>
-              <h2 style={{ color: '#00fff5', marginBottom: '1rem' }}>What I Do</h2>
-              <ul style={{ 
-                listStyle: 'none',
-                padding: 0,
-                margin: 0,
-                color: 'rgba(255, 255, 255, 0.8)',
-                textAlign: 'left'
-              }}>
-                <li style={{ marginBottom: '0.5rem' }}>🚀 Build scalable frontend architectures</li>
-                <li style={{ marginBottom: '0.5rem' }}>🎨 Create engaging user interfaces</li>
-                <li style={{ marginBottom: '0.5rem' }}>⚡ Optimize performance & accessibility</li>
-                <li style={{ marginBottom: '0.5rem' }}>🔄 Implement responsive layouts</li>
-                <li style={{ marginBottom: '0.5rem' }}>🤝 Collaborate in cross-functional teams</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+            <WhatIDoBox>
+              <BoxHeading color="#00fff5">What I Do</BoxHeading>
+              <SkillsList>
+                <SkillsListItem>🚀 Build scalable frontend architectures</SkillsListItem>
+                <SkillsListItem>🎨 Create engaging user interfaces</SkillsListItem>
+                <SkillsListItem>⚡ Optimize performance & accessibility</SkillsListItem>
+                <SkillsListItem>🔄 Implement responsive layouts</SkillsListItem>
+                <SkillsListItem>🤝 Collaborate in cross-functional teams</SkillsListItem>
+              </SkillsList>
+            </WhatIDoBox>
+          </InfoGrid>
+        </HomeContainer>
       ),
     },
     {
       id: 'projects',
       label: 'Projects',
       content: (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2rem',
-          padding: '1rem',
-          marginTop: '100px'
-        }}>
+        <ProjectsGrid>
           {sampleProjects.map((project, index) => (
             <ProjectCard
               key={index}
@@ -139,57 +122,23 @@ function App() {
               githubUrl={project.githubUrl}
             />
           ))}
-        </div>
+        </ProjectsGrid>
       ),
     },
     {
       id: 'contact',
       label: 'Contact',
       content: (
-        <div style={{
-          maxWidth: '800px',
-          margin: '0 auto',
-          padding: '2rem',
-          background: 'rgba(0, 0, 0, 0.3)',
-          borderRadius: '12px',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          marginTop: '100px'
-        }}>
-          <h2 style={{ color: '#00fff5', marginBottom: '2rem', textAlign: 'center' }}>Get in Touch</h2>
+        <ContactContainer>
+          <ContactHeading>Get in Touch</ContactHeading>
           
-          <div style={{
-            display: 'grid',
-            gap: '2rem',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            marginBottom: '3rem'
-          }}>
-            <a
+          <ContactLinksGrid>
+            <LinkedInLink
               href="https://www.linkedin.com/in/lucian-kallee-24893519a/"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                padding: '1rem',
-                background: 'rgba(0, 255, 245, 0.1)',
-                border: '1px solid rgba(0, 255, 245, 0.3)',
-                borderRadius: '8px',
-                color: '#00fff5',
-                textDecoration: 'none',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = 'rgba(0, 255, 245, 0.2)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = 'rgba(0, 255, 245, 0.1)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
             >
-              <svg
+              <ContactIcon
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -197,34 +146,14 @@ function App() {
                 fill="#00fff5"
               >
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
+              </ContactIcon>
               <span>Connect on LinkedIn</span>
-            </a>
+            </LinkedInLink>
 
-            <a
+            <EmailLink
               href="mailto:luciankallee@gmail.com"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                padding: '1rem',
-                background: 'rgba(255, 20, 147, 0.1)',
-                border: '1px solid rgba(255, 20, 147, 0.3)',
-                borderRadius: '8px',
-                color: '#ff1493',
-                textDecoration: 'none',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 20, 147, 0.2)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 20, 147, 0.1)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
             >
-              <svg
+              <ContactIcon
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -232,39 +161,15 @@ function App() {
                 fill="#ff1493"
               >
                 <path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"/>
-              </svg>
+              </ContactIcon>
               <span>Send me an email</span>
-            </a>
+            </EmailLink>
 
-            <a
+            <ResumeLink
               href="/resume.pdf"
               download
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                padding: '1.2rem',
-                background: 'rgba(75, 0, 130, 0.3)',
-                border: '2px solid rgba(147, 112, 219, 0.6)',
-                borderRadius: '12px',
-                color: '#9370db',
-                textDecoration: 'none',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 0 15px rgba(147, 112, 219, 0.4)',
-                animation: 'pulse 2s infinite'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = 'rgba(75, 0, 130, 0.4)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 0 25px rgba(147, 112, 219, 0.6)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = 'rgba(75, 0, 130, 0.3)';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 0 15px rgba(147, 112, 219, 0.4)';
-              }}
             >
-              <svg
+              <ContactIcon
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -272,21 +177,28 @@ function App() {
                 fill="#4b0082"
               >
                 <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-              </svg>
+              </ContactIcon>
               <span>Download Resume</span>
-            </a>
-          </div>
+            </ResumeLink>
+          </ContactLinksGrid>
 
-          <p style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 0.8)' }}>
+          <ContactFooter>
             I'm always interested in hearing about new opportunities and exciting projects.
             Feel free to reach out through any of the channels above!
-          </p>
-        </div>
+          </ContactFooter>
+        </ContactContainer>
       ),
     },
   ];
 
-  return <TabsContainer tabs={tabs} />;
+  return (
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Scene3DOptimized activeTab={tabs[0].id} />
+        <TabsContainer tabs={tabs} />
+      </Suspense>
+    </>
+  );
 }
 
 export default App;

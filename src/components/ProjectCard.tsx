@@ -1,3 +1,4 @@
+// React is imported automatically with JSX in modern React
 import styled from '@emotion/styled';
 
 interface ProjectProps {

@@ -11,6 +11,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Improve scrolling performance */
+  scroll-behavior: smooth;
 }
 
 a {
@@ -25,9 +28,15 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
+  min-height: -webkit-fill-available; /* Mobile viewport height fix */
+  overscroll-behavior: none; /* Prevent bounce effects */
+  
+  /* Improve paint performance */
+  backface-visibility: hidden;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -45,6 +54,8 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  touch-action: manipulation; /* Improve touch response */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
 }
 button:hover {
   border-color: #646cff;
@@ -52,6 +63,28 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Performance optimizations */
+img, video {
+  content-visibility: auto; /* Improve rendering performance */
+  max-width: 100%;
+  height: auto;
+}
+
+/* Optimize animations */
+.animate {
+  will-change: transform, opacity;
+}
+
+/* Reduce motion if user prefers */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -65,4 +98,8 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.css-1qg9kwn {
+  margin-top: 100px;
 }
