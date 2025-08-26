@@ -12,44 +12,6 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       react(),
-      // Compress assets with Brotli and Gzip in production
-      isProduction && viteCompression({
-        algorithm: 'brotliCompress',
-        threshold: 10240, // Only compress files > 10kb
-      }),
-      isProduction && viteCompression({
-        algorithm: 'gzip',
-        threshold: 10240,
-      }),
-      // Optimize images
-      isProduction && viteImagemin({
-        gifsicle: {
-          optimizationLevel: 7,
-          interlaced: false,
-        },
-        optipng: {
-          optimizationLevel: 7,
-        },
-        mozjpeg: {
-          quality: 80,
-        },
-        pngquant: {
-          quality: [0.8, 0.9],
-          speed: 4,
-        },
-        svgo: {
-          plugins: [
-            {
-              name: 'removeViewBox',
-              active: false,
-            },
-            {
-              name: 'removeEmptyAttrs',
-              active: false,
-            },
-          ],
-        },
-      }),
       // Bundle analyzer (only in analyze mode)
       isAnalyze && visualizer({
         open: true,
@@ -62,24 +24,6 @@ export default defineConfig(({ mode }) => {
       target: 'es2022',
       // Generate sourcemaps for production build
       sourcemap: true,
-      // Minify output
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          drop_console: isProduction, // Remove console.log in production
-          drop_debugger: isProduction, // Remove debugger statements
-        },
-      },
-      // Split chunks for better caching
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom'],
-            'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
-            'animation-vendor': ['gsap'],
-          },
-        },
-      },
       // Reduce chunk size warnings threshold
       chunkSizeWarningLimit: 1000,
     },

@@ -244,7 +244,7 @@ export const themes = {
 };
 
 // Default theme
-let activeTheme = 'highContrast';
+let activeTheme: keyof typeof themes = 'highContrast';
 
 // Function to get the current active theme name
 export const getActiveTheme = () => activeTheme;
@@ -259,12 +259,12 @@ export const setActiveTheme = (themeName: keyof typeof themes) => {
       const colorKey = key as keyof typeof theme.colors;
       
       // Access the active theme colors in a type-safe way
-      // Use type assertion to handle the string indexing
       const themeColors = themes[activeTheme].colors;
-      const value = themeColors[colorKey as keyof typeof themeColors];
       
-      if (value !== undefined) {
-        theme.colors[colorKey] = value;
+      // Only update if the key exists in both theme objects
+      if (colorKey in themeColors) {
+        // Use type assertion to ensure type safety
+        theme.colors[colorKey] = themeColors[colorKey as keyof typeof themeColors] as any;
       }
     });
     return true;
@@ -273,7 +273,7 @@ export const setActiveTheme = (themeName: keyof typeof themes) => {
 };
 
 // Export the themes object for the theme switcher
-export const availableThemes = ['neon', 'modernDark', 'professionalDark', 'highContrast', 'sunset', 'forest'] as const;
+export const availableThemes = Object.keys(themes) as Array<keyof typeof themes>;
 
 // The main theme object that will be used throughout the app
 export const theme = {

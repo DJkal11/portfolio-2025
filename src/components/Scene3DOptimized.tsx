@@ -193,15 +193,11 @@ const NeonGeometry = ({ activeTab, orbitControlsRef, lowPerformanceMode }: Geome
     }
   }, [smallObjectsCount, decorativeObjectsCount]);
 
-  // Optimize animation frame rate based on performance mode
-  const frameSkip = lowPerformanceMode ? 2 : 1;
-  const frameCount = useRef(0);
-
   // Frame counter for skipping frames on low-end devices
   const frameCountRef = useRef(0);
   
   // Animation loop with frame skipping for low-end devices
-  useFrame((state, delta) => {
+  useFrame((state) => {
     if (!groupRef.current) return;
     
     // Skip frames for low performance mode
