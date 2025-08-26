@@ -690,8 +690,12 @@ export const Scene3DOptimized = ({ activeTab }: Scene3DProps) => {
           autoRotate={hovered && !lowPerformanceMode}
           autoRotateSpeed={0.5}
         />
-        {/* Enhanced environment with better lighting */}
-        <Environment preset="night" background={false} blur={1.5} />
+        {/* Use a simple environment without external HDRI to avoid CSP issues */}
+        <Environment background={false} blur={1.5}>
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[10, 10, 5]} intensity={1} />
+          <directionalLight position={[-10, -10, -5]} intensity={0.2} color="#0077ff" />
+        </Environment>
         
         {/* Post-processing effects temporarily removed to fix errors */}
       </Canvas>
