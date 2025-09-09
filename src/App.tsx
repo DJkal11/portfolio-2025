@@ -39,6 +39,22 @@ function App() {
   // Project data
   const sampleProjects = [
     {
+      title: "GitHub Repository Dashboard",
+      description: "A data visualization dashboard for GitHub repositories that provides insights and analytics on repository activity, contributions, and performance metrics.",
+      imageUrl: "/images/repo-dashboard.jpg",
+      techStack: ["Next.js", "Tailwind CSS", "Redux", "GitHub API", "Data Visualization"],
+      liveUrl: "https://repo-dashboard.netlify.app/",
+      githubUrl: "#"
+    },
+    {
+      title: "Social Postman",
+      description: "A social media feed application that allows users to share posts, interact with content, and connect with others. Features a clean, modern interface with real-time updates and responsive design.",
+      imageUrl: "/images/social-feed.jpg",
+      techStack: ["Svelte", "SvelteKit", "JavaScript", "CSS", "Netlify"],
+      liveUrl: "https://social-postman.netlify.app/",
+      githubUrl: "#"
+    },
+    {
       title: "Weather App",
       description: "A modern weather application that provides real-time weather information with a clean, intuitive interface. Features include current conditions, forecasts, and location-based weather data.",
       imageUrl: "/images/weather.jpg",
